@@ -3,6 +3,7 @@ const fs = require("fs");
 const puppeteer = require("puppeteer");
 const config = require("./config");
 const logIn = require("./src/login");
+const scrapeUserHistory = require("./src/scrapeUserHistory");
 
 /*
 DONE:
@@ -14,9 +15,12 @@ TODO:
 5. Scrape
 6. Pagination
 7a. Save to CSV
+8. Error handling
 LATER:
 2b. Take input username, multiple (from file)
 7b. Save to multiple CSV's
+FUTURE:
+- Scrape details from game url
 */
 
 console.log("\x1b[35m%s\x1b[0m", "Running 'darts-scraper'...");
@@ -28,15 +32,14 @@ if(!fs.existsSync(OUTPUT_DIR)){
     console.log("\x1b[32m%s\x1b[0m", `Output directory '${OUTPUT_DIR}' created!`)
 }
 
-const getURL = (username, page=1) => `https://lidarts.org/@/${username}/game_history?page=${page}`;
-
-const target_url = getURL(process.env.TARGET);
 
 // Main
 (async () => {
     const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
-    await logIn(page);
+    await logIn(page, process.env.LOGIN, process.env.PWD);
+    const userHistory = await scrapeUserHistory(page, process.env.TARGET);
+    console.log(userHistory)
     await browser.close();
 })();
 
