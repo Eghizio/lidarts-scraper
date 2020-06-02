@@ -1,4 +1,5 @@
 node_modules
 .env
-game_history
 test_screenshots
+game_history/*
+!game_history/doman100/

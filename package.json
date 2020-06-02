@@ -1,11 +1,11 @@
 {
   "name": "darts-scraper",
   "version": "1.0.0",
-  "description": "web scraping darts ranking page",
+  "description": "web scraping lidarts.org ranking page",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "start-env": "env LOGIN=123 PWD=456 node app.js",
+    "start-env": "env LOGIN=123 PWD=456 TARGET=input.txt node app.js",
     "start-clean": "node --no-warnings app.js"
   },
   "keywords": [],
