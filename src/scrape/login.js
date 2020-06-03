@@ -1,4 +1,5 @@
 const { LOGIN_PAGE, LOGIN_XPath } = require("../../config");
+const Logger = require("../utils/logger");
 
 
 const logIn = async (page, login=process.env.LOGIN, password=process.env.PWD) => {
@@ -14,7 +15,7 @@ const logIn = async (page, login=process.env.LOGIN, password=process.env.PWD) =>
     await submit_button.click();
 
     await page.waitForNavigation();
-    console.log("\x1b[32m%s\x1b[0m", "Logged in!");
+    Logger.success("Logged in!");
 };
 
 module.exports = logIn;

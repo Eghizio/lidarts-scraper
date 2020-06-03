@@ -1,12 +1,15 @@
-const { HISTORY_XPath } = require("../../config");
+const { MODE, HISTORY_XPath } = require("../../config");
+const Logger = require("../utils/logger");
 
 
 const getURL = (username, pageNumber=1) => `https://lidarts.org/@/${username}/game_history?page=${pageNumber}`;
 
 const getNextPage = async (page) => {
     const [paginationNav] = await page.$x(HISTORY_XPath.pagination);
+
     const nextPage = await paginationNav.evaluate(nav => {
         let next = null;
+
         [...nav.children].some(item => {
             const link = item.querySelector("a.page-link");
             const aria = link.getAttribute("aria-label");
@@ -41,21 +44,27 @@ const scrapeGames = async (page) => {
     return games;
 };
 
+const paginate = async (page, nextPage, history) => {
+    Logger.debug(`GOING TO ===> ${nextPage}`);
+    await page.goto(nextPage, {waitUntil: 'networkidle2'});
+
+    const data = await scrapeGames(page);
+    history.push(...data);
+    Logger.debug(`Found ${data.length} games at '${nextPage}'`);
+
+    nextPage = await getNextPage(page);
+
+    return nextPage ? await paginate(page, nextPage, history) : history;
+};
+
 // Get user history
-const scrapeUserHistory = async (page, user=process.env.TARGET) => {
-    const history = [];
+const scrapeUserHistory = async (page, user) => {
+    const initialHistory = [];
 
     let nextPage = getURL(user);
     
     // Paginate and Scrape data
-    while(nextPage){
-        console.log("\x1b[33m%s\x1b[0m", `GOING TO ===> ${nextPage}`) //debug
-        await page.goto(nextPage, {waitUntil: 'networkidle2'});
-        const data = await scrapeGames(page);
-        history.push(...data);
-        console.log("\x1b[33m%s\x1b[0m", `${nextPage}: ${data.length}`) //debug
-        nextPage = await getNextPage(page);
-    }
+    const history = await paginate(page, nextPage, initialHistory);
 
     return history;
 };

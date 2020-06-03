@@ -16,6 +16,7 @@ Create [`.env`](https://github.com/motdotla/dotenv) file and provide *Your [lida
 + LOGIN
 + PWD
 + TARGET
++ MODE
 
 In order to customize the appliction, edit [`config.js`](https://github.com/Eghizio/lidarts-scraper/blob/master/config.js). You can customize the *selectors* if they change in the future.
 + INPUT_DIR

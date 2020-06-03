@@ -1,7 +1,7 @@
 const INPUT_DIR = process.env.TARGET || "input.txt";
 const OUTPUT_DIR = "game_history";
 
-const MODE = "PROD";
+const MODE = process.env.MODE || "production";
 const LOGIN_PAGE = "https://lidarts.org/login";
 
 const LOGIN_XPath = {
