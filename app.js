@@ -1,4 +1,3 @@
-require('dotenv').config(); // customize .env file
 const fs = require("fs");
 const puppeteer = require("puppeteer");
 const config = require("./config");
@@ -14,21 +13,23 @@ DONE:
 3. Access Web Page
 4. Login
 5a. Scrape one
+5a. Scrape multiple
 6. Pagination
 7a. Save to CSV
-TODO:
-5a. Scrape multiple
-8. Error handling
-LATER:
 7b. Save to multiple CSV's
+TODO:
+8. Skipping users with 0 games
+9. Proper error handling
+10. Input validation
+11. Handling non existing users
 FUTURE:
+- Scrape only new
 - Scrape details from game url
 */
 
 
 Logger.info("Running 'darts-scraper'...");
 const { INPUT_DIR, OUTPUT_DIR, MODE } = config;
-
 
 // Main
 (async () => {

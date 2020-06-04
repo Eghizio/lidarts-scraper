@@ -1,11 +1,11 @@
 {
   "name": "darts-scraper",
   "version": "1.0.0",
-  "description": "web scraping lidarts.org ranking page",
+  "description": "Web scraper for gathering lidarts.org users game history into CSV",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "start-env": "env LOGIN=123 PWD=456 TARGET=input.txt node app.js",
+    "start-env": "env LOGIN=Username PWD=Password INPUT_FILE=input.txt node app.js",
     "start-clean": "node --no-warnings app.js"
   },
   "keywords": [],

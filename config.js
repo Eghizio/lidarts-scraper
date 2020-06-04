@@ -1,4 +1,6 @@
-const INPUT_DIR = process.env.TARGET || "input.txt";
+require("dotenv").config();
+
+const INPUT_DIR = process.env.INPUT_FILE || "input.txt";
 const OUTPUT_DIR = "game_history";
 
 const MODE = process.env.MODE || "production";
