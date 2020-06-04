@@ -8,7 +8,7 @@ Web scraper for gathering users game history into CSV format files using: `node.
 >`npm install`
 
 ## Setup
-Create [`.env`](https://github.com/motdotla/dotenv) file and provide *Your [lidarts.org](https://lidarts.org/) credentials* as well as the *input file* and *mode*. For defaults see __Configuration__ below.
+Create [`.env`](https://github.com/motdotla/dotenv) file and provide *Your [lidarts.org](https://lidarts.org/) credentials* as well as the *input file* and *mode*. For defaults see [__Configuration__](https://github.com/Eghizio/lidarts-scraper/blob/master/README.md#configuration) below.
 ```python
 # .env
 

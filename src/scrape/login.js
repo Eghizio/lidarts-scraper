@@ -2,7 +2,7 @@ const { LOGIN_PAGE, LOGIN_XPath } = require("../../config");
 const Logger = require("../utils/logger");
 
 
-const logIn = async (page, login=process.env.LOGIN, password=process.env.PWD) => {
+const logIn = async (page, login, password) => {
     await page.goto(LOGIN_PAGE, {waitUntil: 'networkidle2'});
 
     const [login_input] = await page.$x(LOGIN_XPath.login);
